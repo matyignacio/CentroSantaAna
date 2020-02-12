@@ -15,21 +15,19 @@ use Yii;
  * @property Antecedente $antecedente
  * @property Paciente $paciente
  */
-class AntecedentePaciente extends \yii\db\ActiveRecord
-{
+class AntecedentePaciente extends \yii\db\ActiveRecord {
+
     /**
      * {@inheritdoc}
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'antecedente_paciente';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['id_antecedente', 'id_paciente'], 'integer'],
             [['observaciones'], 'string'],
@@ -41,8 +39,7 @@ class AntecedentePaciente extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'id_antecedente' => 'Id Antecedente',
@@ -54,16 +51,15 @@ class AntecedentePaciente extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAntecedente()
-    {
+    public function getAntecedente() {
         return $this->hasOne(Antecedentes::className(), ['id' => 'id_antecedente']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPaciente()
-    {
+    public function getPaciente() {
         return $this->hasOne(Paciente::className(), ['id' => 'id_paciente']);
     }
+
 }
