@@ -6,10 +6,13 @@ use Yii;
 use yii\filters\AccessControl;
 use app\models\User;
 use app\models\Paciente;
+use yii\helpers\Html;
+use yii\helpers\Url;
 use app\models\PacienteSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Mpdf\Mpdf;
 
 /**
  * PacienteController implements the CRUD actions for Paciente model.
@@ -129,6 +132,131 @@ class PacienteController extends Controller {
         return $this->render('update', [
                     'model' => $model,
         ]);
+    }
+
+    public function actionImprimir($id) {
+        // OBTENEMOS EL MODELO
+        $model = \app\models\Paciente::findOne($id);
+        // OBTENEMOS SU RELACION DE MUCHOS A MUCHOS
+        $findAll = \app\models\AntecedentePaciente::find()
+                ->where('id_paciente = :id_paciente', [':id_paciente' => $model->id])
+                ->all();
+        $findAllDiagnosticos = \app\models\Diagnostico::find()
+                ->where('id_paciente = :id_paciente', [':id_paciente' => $model->id])
+                ->all();
+        // OBTENEMOS EL USUARIO
+        $usuario = \app\models\User::findIdentity($model->id_usuario);
+
+        $mpdf = new Mpdf();
+        $html = '
+<style>
+h1 {
+	font-family: sans-serif;
+	font-weight: bold;
+	margin-top: 1em;
+	margin-bottom: 0.5em;
+}
+h4 {
+	font-family: sans-serif;
+	font-weight: bold;
+	margin-top: 1em;
+	margin-bottom: 0.5em;
+}
+h5 {
+	font-family: sans-serif;
+	margin-top: 1em;
+	margin-bottom: 0.5em;
+}
+h6 {
+	font-family: sans-serif;
+	margin-top: 1em;
+	margin-bottom: 0.5em;
+}
+p {
+	font-family: sans-serif;
+        font-size: 9pt;
+	margin-top: 1em;
+	margin-bottom: 0.5em;
+}
+div {
+	padding:1em;
+	margin-bottom: 1em;
+	text-align:justify;
+}
+</style>
+<body >
+<div style="border:0.1mm solid #220044; ">
+    <table class="table">
+        <tr>
+            <td width="15%">
+            ' . Html::img('@web/ima/logo.png') . '</td>
+            <td width="85%" align="center"><h1>Informe de Evaluación</h1></td>
+        </tr>
+    </table>
+    <h4>Datos del paciente</h4>
+<div style="border:0.1mm solid #151515; background-color:#E6E6E6; ">
+    <table width="100%" style="border:0.1mm solid #151515;">
+    <tr>
+        <td width="20%"><p>Nombre y Apellido</p>
+        </td>
+        <td width="30%"><h5>' . $model->nombre . '</h5>
+        </td>
+    </tr>
+    <tr>
+        <td width="20%"><p>Fecha de nacimiento</p>
+        </td>
+        <td width="30%"><h5>' . Yii::$app->formatter->asDate($model->fecha_nacimiento) . '</h5>
+        </td>
+        <td width="20%"><p>DNI</p>
+        </td>
+        <td width="30%"><h5>' . $model->dni . '</h5>
+        </td>
+    </tr>
+    <tr>
+        <td width="20%"><p>Obra Social</p>
+        </td>
+        <td width="30%"><h5>' . $model->obraSocial->nombre . '</h5>
+        </td>
+        <td width="20%"><p>Nº de afiliado</p>
+        </td>
+        <td width="30%"><h5>' . $model->id . '</h5>
+        </td>
+    </tr>
+    </table>
+</div>
+    <h4>Diagnosticos</h4>
+<div style="border:0.1mm solid #151515; background-color:#E6E6E6; ">
+    <table width=100%>
+    ';
+        foreach ($findAllDiagnosticos as $diagnosticopaciente) {
+             $html .= '<tr>';
+              $html .= '<td><p>$' . ($diagnosticopaciente->resumen)
+              . '</p></td>';
+              $html .= '</tr>'; 
+        }
+        $html .= '</table>
+</div>
+<h4>Antecedentes</h4>
+<div style="border:0.1mm solid #151515; background-color:#E6E6E6; ">
+    <table width=100%>
+    ';
+        foreach ($findAll as $antecedentepaciente) {
+            $html .= '<tr>';
+            $html .= '<td><p>* ' . $antecedentepaciente->antecedente->nombre
+                    . '</p></td>';
+            $html .= '</tr>';
+        }
+        $html .= '</table>
+</div>';
+
+        $mpdf->SetDisplayMode('fullpage');
+        $mpdf->SetFooter('<h6 align="center">Domicilio: San Nicolas de Bari O 1316 Bº San Vicente / Tel: 4427849</h6></br>'
+                . '<h6 align="center">Centro Santa Ana</h6></br>'
+                . '<h6 align="center">Pagina {PAGENO} de {nbpg}');
+        $mpdf->SetTitle('Imprimir informe');
+        $mpdf->WriteHTML($html);
+        $mpdf->Output();
+        exit;
     }
 
     /**

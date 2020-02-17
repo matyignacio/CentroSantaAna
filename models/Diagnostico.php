@@ -35,7 +35,7 @@ class Diagnostico extends \yii\db\ActiveRecord {
             [['resumen'], 'string'],
             [['is_sensible', 'id_paciente', 'id_usuario'], 'integer'],
             [['id_paciente'], 'exist', 'skipOnError' => true, 'targetClass' => Paciente::className(), 'targetAttribute' => ['id_paciente' => 'id']],
-            [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_usuario' => 'id']],
+            [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['id_usuario' => 'id']],
         ];
     }
 
@@ -47,9 +47,9 @@ class Diagnostico extends \yii\db\ActiveRecord {
             'id' => 'ID',
             'fecha' => 'Fecha',
             'resumen' => 'Resumen',
-            'is_sensible' => 'Is Sensible',
-            'id_paciente' => 'Id Paciente',
-            'id_usuario' => 'Id Usuario',
+            'is_sensible' => 'Es Sensible',
+            'id_paciente' => 'Paciente',
+            'id_usuario' => 'Usuario',
         ];
     }
 
@@ -64,7 +64,7 @@ class Diagnostico extends \yii\db\ActiveRecord {
      * @return \yii\db\ActiveQuery
      */
     public function getUsuario() {
-        return $this->hasOne(User::className(), ['id' => 'id_usuario']);
+        return $this->hasOne(Users::className(), ['id' => 'id_usuario']);
     }
 
 }

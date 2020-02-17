@@ -62,6 +62,9 @@ AppAsset::register($this);
                     'items' => [
                         ['label' => 'Buscar pacientes', 'url' => ['/paciente']],
                         ['label' => 'Nuevo paciente', 'url' => ['/paciente/create']],
+                        '<li class="dropdown-header">Diagnosticos</li>',
+                        /*['label' => 'Buscar diagnostico', 'url' => ['/paciente']],*/
+                        ['label' => 'Nuevo diagnostico', 'url' => ['/diagnostico/create']],
                     ],
                 ];
                 $menuItems[] = [

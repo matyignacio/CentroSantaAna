@@ -61,7 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'columns' => [
                     [
-                        'attribute' => 'resumen:ntext',
+                        'attribute' => 'resumen',
                         'labelColOptions' => ['style' => 'width:10%'],
                         'valueColOptions' => ['style' => 'width:23%'],
                     ],
