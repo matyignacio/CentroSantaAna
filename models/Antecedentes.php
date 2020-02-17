@@ -12,21 +12,19 @@ use Yii;
  *
  * @property AntecedentePaciente[] $antecedentePacientes
  */
-class Antecedentes extends \yii\db\ActiveRecord
-{
+class Antecedentes extends \yii\db\ActiveRecord {
+
     /**
      * {@inheritdoc}
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'antecedentes';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['nombre'], 'required'],
             [['nombre'], 'string', 'max' => 45],
@@ -36,8 +34,7 @@ class Antecedentes extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'nombre' => 'Nombre',
@@ -47,8 +44,8 @@ class Antecedentes extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAntecedentePacientes()
-    {
+    public function getAntecedentePacientes() {
         return $this->hasMany(AntecedentePaciente::className(), ['id_antecedente' => 'id']);
     }
+
 }

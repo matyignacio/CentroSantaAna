@@ -12,21 +12,19 @@ use Yii;
  *
  * @property Paciente[] $pacientes
  */
-class ObraSocial extends \yii\db\ActiveRecord
-{
+class ObraSocial extends \yii\db\ActiveRecord {
+
     /**
      * {@inheritdoc}
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'obra_social';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['nombre'], 'required'],
             [['nombre'], 'string', 'max' => 45],
@@ -36,8 +34,7 @@ class ObraSocial extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'nombre' => 'Nombre',
@@ -47,8 +44,8 @@ class ObraSocial extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPacientes()
-    {
+    public function getPacientes() {
         return $this->hasMany(Paciente::className(), ['id_obra_social' => 'id']);
     }
+
 }

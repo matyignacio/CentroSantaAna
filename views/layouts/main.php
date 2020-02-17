@@ -40,6 +40,30 @@ AppAsset::register($this);
                             'linkOptions' => ['data-method' => 'post'],],
                 ]];
             } else {
+                if (Yii::$app->user->identity->role == 2) {
+                    // Si el usuario es administrador, vera este menu
+                    $menuItems[] = [
+                        'label' => 'Administrar',
+                        'items' => [
+                            '<li class="dropdown-header">Antecedentes</li>',
+                            ['label' => 'Buscar antecedentes', 'url' => ['/antecedentes']],
+                            ['label' => 'Nuevo antecedente', 'url' => ['/antecedentes/create']],
+                            '<li class="dropdown-header">Obra Social</li>',
+                            ['label' => 'Buscar Obra Social', 'url' => ['/obrasocial']],
+                            ['label' => 'Nueva Obra Social', 'url' => ['/obrasocial/create']],
+                            '<li class="dropdown-header">Profesion</li>',
+                            ['label' => 'Buscar Profesion', 'url' => ['/profesion']],
+                            ['label' => 'Nueva Profesion', 'url' => ['/profesion/create']],
+                        ],
+                    ];
+                }
+                $menuItems[] = [
+                    'label' => 'Pacientes',
+                    'items' => [
+                        ['label' => 'Buscar pacientes', 'url' => ['/paciente']],
+                        ['label' => 'Nuevo paciente', 'url' => ['/paciente/create']],
+                    ],
+                ];
                 $menuItems[] = [
                     'label' => 'Salir (' . Yii::$app->user->identity->username . ')',
                     'items' => [

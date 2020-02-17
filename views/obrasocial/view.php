@@ -6,8 +6,8 @@ use kartik\detail\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\ObraSocial */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Obra Socials', 'url' => ['index']];
+$this->title = $model->nombre;
+$this->params['breadcrumbs'][] = ['label' => 'Obras Sociales', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -17,45 +17,49 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Actualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Eliminar', ['delete', 'id' => $model->id], [
-        'class' => 'btn btn-danger',
-        'data' => [
-        'confirm' => 'Esta seguro que desea eliminar este item?',
-        'method' => 'post',
-        ],
-        ]) ?>
+        <?=
+        Html::a('Eliminar', ['delete', 'id' => $model->id], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => 'Esta seguro que desea eliminar este item?',
+                'method' => 'post',
+            ],
+        ])
+        ?>
     </p>
 
-    <?= DetailView::widget([
-    'model' => $model,
-    'condensed' => true,
-    'hover' => true,
-    'buttons1' => '',
-    'mode' => DetailView::MODE_VIEW,
-    'panel' => [
-    'heading' => 'Obra Socials'  . $model->id,
-    'type' => DetailView::TYPE_PRIMARY,
-    ],
-    'attributes' => [
-    [
+    <?=
+    DetailView::widget([
+        'model' => $model,
+        'condensed' => true,
+        'hover' => true,
+        'buttons1' => '',
+        'mode' => DetailView::MODE_VIEW,
+        'panel' => [
+            'heading' => 'Obra Socials' . $model->id,
+            'type' => DetailView::TYPE_PRIMARY,
+        ],
+        'attributes' => [
+            [
                 'columns' => [
-                        [
+                    [
                         'attribute' => 'id',
                         'labelColOptions' => ['style' => 'width:10%'],
                         'valueColOptions' => ['style' => 'width:23%'],
                     ],
                 ],
             ],
-[
+            [
                 'columns' => [
-                        [
+                    [
                         'attribute' => 'nombre',
                         'labelColOptions' => ['style' => 'width:10%'],
                         'valueColOptions' => ['style' => 'width:23%'],
                     ],
                 ],
             ],
-    ],
-    ]) ?>
+        ],
+    ])
+    ?>
 
 </div>

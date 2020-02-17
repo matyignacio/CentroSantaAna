@@ -9,13 +9,12 @@ use app\models\Antecedentes;
 /**
  * AntecedentesSearch represents the model behind the search form of `app\models\Antecedentes`.
  */
-class AntecedentesSearch extends Antecedentes
-{
+class AntecedentesSearch extends Antecedentes {
+
     /**
      * {@inheritdoc}
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['id'], 'integer'],
             [['nombre'], 'safe'],
@@ -25,8 +24,7 @@ class AntecedentesSearch extends Antecedentes
     /**
      * {@inheritdoc}
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -38,8 +36,7 @@ class AntecedentesSearch extends Antecedentes
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = Antecedentes::find();
 
         // add conditions that should always apply here
@@ -65,4 +62,5 @@ class AntecedentesSearch extends Antecedentes
 
         return $dataProvider;
     }
+
 }

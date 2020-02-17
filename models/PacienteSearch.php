@@ -9,13 +9,12 @@ use app\models\Paciente;
 /**
  * PacienteSearch represents the model behind the search form of `app\models\Paciente`.
  */
-class PacienteSearch extends Paciente
-{
+class PacienteSearch extends Paciente {
+
     /**
      * {@inheritdoc}
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['id', 'dni', 'id_usuario', 'id_obra_social'], 'integer'],
             [['nombre', 'fecha_nacimiento', 'telefono', 'domicilio', 'fecha_ingreso', 'datos_padre', 'datos_madre', 'familiar_responsable', 'derivador_por', 'hospital'], 'safe'],
@@ -25,8 +24,7 @@ class PacienteSearch extends Paciente
     /**
      * {@inheritdoc}
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -38,8 +36,7 @@ class PacienteSearch extends Paciente
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = Paciente::find();
 
         // add conditions that should always apply here
@@ -67,14 +64,15 @@ class PacienteSearch extends Paciente
         ]);
 
         $query->andFilterWhere(['like', 'nombre', $this->nombre])
-            ->andFilterWhere(['like', 'telefono', $this->telefono])
-            ->andFilterWhere(['like', 'domicilio', $this->domicilio])
-            ->andFilterWhere(['like', 'datos_padre', $this->datos_padre])
-            ->andFilterWhere(['like', 'datos_madre', $this->datos_madre])
-            ->andFilterWhere(['like', 'familiar_responsable', $this->familiar_responsable])
-            ->andFilterWhere(['like', 'derivador_por', $this->derivador_por])
-            ->andFilterWhere(['like', 'hospital', $this->hospital]);
+                ->andFilterWhere(['like', 'telefono', $this->telefono])
+                ->andFilterWhere(['like', 'domicilio', $this->domicilio])
+                ->andFilterWhere(['like', 'datos_padre', $this->datos_padre])
+                ->andFilterWhere(['like', 'datos_madre', $this->datos_madre])
+                ->andFilterWhere(['like', 'familiar_responsable', $this->familiar_responsable])
+                ->andFilterWhere(['like', 'derivador_por', $this->derivador_por])
+                ->andFilterWhere(['like', 'hospital', $this->hospital]);
 
         return $dataProvider;
     }
+
 }

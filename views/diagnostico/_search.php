@@ -10,13 +10,15 @@ use yii\widgets\ActiveForm;
 
 <div class="diagnostico-search">
 
-    <?php $form = ActiveForm::begin([
-        'action' => ['index'],
-        'method' => 'get',
-        'options' => [
-            'data-pjax' => 1
-        ],
-    ]); ?>
+    <?php
+    $form = ActiveForm::begin([
+                'action' => ['index'],
+                'method' => 'get',
+                'options' => [
+                    'data-pjax' => 1
+                ],
+    ]);
+    ?>
 
     <?= $form->field($model, 'id') ?>
 
@@ -28,7 +30,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id_paciente') ?>
 
-    <?php // echo $form->field($model, 'id_usuario') ?>
+    <?php // echo $form->field($model, 'id_usuario')  ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

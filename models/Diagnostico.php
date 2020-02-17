@@ -17,21 +17,19 @@ use Yii;
  * @property Paciente $paciente
  * @property User $usuario
  */
-class Diagnostico extends \yii\db\ActiveRecord
-{
+class Diagnostico extends \yii\db\ActiveRecord {
+
     /**
      * {@inheritdoc}
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'diagnostico';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['fecha'], 'safe'],
             [['resumen'], 'string'],
@@ -44,8 +42,7 @@ class Diagnostico extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'fecha' => 'Fecha',
@@ -59,16 +56,15 @@ class Diagnostico extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPaciente()
-    {
+    public function getPaciente() {
         return $this->hasOne(Paciente::className(), ['id' => 'id_paciente']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUsuario()
-    {
+    public function getUsuario() {
         return $this->hasOne(User::className(), ['id' => 'id_usuario']);
     }
+
 }

@@ -9,13 +9,12 @@ use app\models\ObraSocial;
 /**
  * ObrasocialSearch represents the model behind the search form of `app\models\ObraSocial`.
  */
-class ObrasocialSearch extends ObraSocial
-{
+class ObrasocialSearch extends ObraSocial {
+
     /**
      * {@inheritdoc}
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['id'], 'integer'],
             [['nombre'], 'safe'],
@@ -25,8 +24,7 @@ class ObrasocialSearch extends ObraSocial
     /**
      * {@inheritdoc}
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -38,8 +36,7 @@ class ObrasocialSearch extends ObraSocial
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = ObraSocial::find();
 
         // add conditions that should always apply here
@@ -65,4 +62,5 @@ class ObrasocialSearch extends ObraSocial
 
         return $dataProvider;
     }
+
 }

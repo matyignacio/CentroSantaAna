@@ -12,21 +12,19 @@ use Yii;
  *
  * @property User[] $users
  */
-class Profesion extends \yii\db\ActiveRecord
-{
+class Profesion extends \yii\db\ActiveRecord {
+
     /**
      * {@inheritdoc}
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'profesion';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['nombre'], 'required'],
             [['nombre'], 'string', 'max' => 45],
@@ -36,8 +34,7 @@ class Profesion extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'nombre' => 'Nombre',
@@ -47,8 +44,8 @@ class Profesion extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUsers()
-    {
+    public function getUsers() {
         return $this->hasMany(User::className(), ['id_profesion' => 'id']);
     }
+
 }

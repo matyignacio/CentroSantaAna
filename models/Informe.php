@@ -13,21 +13,19 @@ use Yii;
  *
  * @property Paciente $paciente
  */
-class Informe extends \yii\db\ActiveRecord
-{
+class Informe extends \yii\db\ActiveRecord {
+
     /**
      * {@inheritdoc}
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'informe';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['id_paciente'], 'integer'],
             [['fecha'], 'required'],
@@ -39,8 +37,7 @@ class Informe extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'id_paciente' => 'Id Paciente',
@@ -51,8 +48,8 @@ class Informe extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPaciente()
-    {
+    public function getPaciente() {
         return $this->hasOne(Paciente::className(), ['id' => 'id_paciente']);
     }
+
 }

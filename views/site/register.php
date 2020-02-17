@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use moonland\select2\Select2;
 ?>
 
 <h3><?= $msg ?></h3>
@@ -39,7 +41,20 @@ $form = ActiveForm::begin([
     </tr>
     <tr>
         <td>
-            <?= $form->field($model, 'role')->dropDownList(['1' => 'Usuario Comun', '2' => 'Administrador'], ['prompt' => 'Seleccione una opcion']); ?>   
+            <?=
+                    $form->field($model, 'role')->dropDownList(['1' => 'Usuario Comun', '2' => 'Administrador'],
+                            ['prompt' => 'Seleccione una opcion'])
+                    ->label('Rol');
+            ?>   
+        </td>
+        <td>
+            <?=
+            $form->field($model, 'id_profesion')->dropDownList(ArrayHelper::map(app\models\Profesion::find()
+                                    ->select('id, nombre')
+                                    ->orderBy('nombre')
+                                    ->all(), 'id', 'nombre'))->label('Profesion');
+            ?>   
+
         </td>
     </tr>
 </table>

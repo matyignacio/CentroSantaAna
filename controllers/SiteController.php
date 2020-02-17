@@ -96,6 +96,7 @@ class SiteController extends Controller {
 //Creamos un token de acceso único para el usuario
                 $table->accessToken = $this->randKey("abcdef0123456789", 200);
                 $table->role = $model->role;
+                $table->id_profesion = $model->id_profesion;
 
 //Si el registro es guardado correctamente
                 if ($table->insert()) {
@@ -111,6 +112,7 @@ class SiteController extends Controller {
                     $model->password = null;
                     $model->password_repeat = null;
                     $model->role = null;
+                    $model->id_profesion = null;
 
                     $msg = "Felicitaciones, su usuario se ha creado correctamente, redireccionando ...";
                     echo "<meta http-equiv='refresh' content='3; " . Url::home() . "'>";

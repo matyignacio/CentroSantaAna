@@ -14,10 +14,11 @@ class FormRegister extends model {
     public $password;
     public $password_repeat;
     public $role;
+    public $id_profesion;
 
     public function rules() {
         return [
-            [['username', 'email', 'password', 'password_repeat', 'nombre', 'role'], 'required', 'message' => 'Campo requerido'],
+            [['username', 'email', 'password', 'password_repeat', 'nombre', 'role', 'id_profesion'], 'required', 'message' => 'Campo requerido'],
             ['username', 'match', 'pattern' => "/^.{3,50}$/", 'message' => 'Mínimo 3 y máximo 50 caracteres'],
             ['username', 'match', 'pattern' => "/^[0-9a-z]+$/i", 'message' => 'Sólo se aceptan letras y números'],
             ['username', 'username_existe'],

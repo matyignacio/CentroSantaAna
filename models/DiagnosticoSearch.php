@@ -9,13 +9,12 @@ use app\models\Diagnostico;
 /**
  * DiagnosticoSearch represents the model behind the search form of `app\models\Diagnostico`.
  */
-class DiagnosticoSearch extends Diagnostico
-{
+class DiagnosticoSearch extends Diagnostico {
+
     /**
      * {@inheritdoc}
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['id', 'is_sensible', 'id_paciente', 'id_usuario'], 'integer'],
             [['fecha', 'resumen'], 'safe'],
@@ -25,8 +24,7 @@ class DiagnosticoSearch extends Diagnostico
     /**
      * {@inheritdoc}
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -38,8 +36,7 @@ class DiagnosticoSearch extends Diagnostico
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = Diagnostico::find();
 
         // add conditions that should always apply here
@@ -69,4 +66,5 @@ class DiagnosticoSearch extends Diagnostico
 
         return $dataProvider;
     }
+
 }

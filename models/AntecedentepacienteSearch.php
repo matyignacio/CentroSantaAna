@@ -9,13 +9,12 @@ use app\models\AntecedentePaciente;
 /**
  * AntecedentepacienteSearch represents the model behind the search form of `app\models\AntecedentePaciente`.
  */
-class AntecedentepacienteSearch extends AntecedentePaciente
-{
+class AntecedentepacienteSearch extends AntecedentePaciente {
+
     /**
      * {@inheritdoc}
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['id', 'id_antecedente', 'id_paciente'], 'integer'],
             [['observaciones'], 'safe'],
@@ -25,8 +24,7 @@ class AntecedentepacienteSearch extends AntecedentePaciente
     /**
      * {@inheritdoc}
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -38,8 +36,7 @@ class AntecedentepacienteSearch extends AntecedentePaciente
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = AntecedentePaciente::find();
 
         // add conditions that should always apply here
@@ -67,4 +64,5 @@ class AntecedentepacienteSearch extends AntecedentePaciente
 
         return $dataProvider;
     }
+
 }
