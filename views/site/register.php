@@ -42,7 +42,8 @@ $form = ActiveForm::begin([
     <tr>
         <td>
             <?=
-                    $form->field($model, 'role')->dropDownList(['1' => 'Usuario Comun', '2' => 'Administrador'],
+                    $form->field($model, 'role')->dropDownList(['1' => 'Usuario Comun', '2' => 'Terapeuta'
+                        , '3' => 'Administrador'],
                             ['prompt' => 'Seleccione una opcion'])
                     ->label('Rol');
             ?>   

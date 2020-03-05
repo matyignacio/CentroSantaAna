@@ -5,7 +5,7 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "diagnostico".
+ * This is the model class for table "evolucion".
  *
  * @property int $id
  * @property string $fecha
@@ -17,13 +17,13 @@ use Yii;
  * @property Paciente $paciente
  * @property User $usuario
  */
-class Diagnostico extends \yii\db\ActiveRecord {
+class Evolucion extends \yii\db\ActiveRecord {
 
     /**
      * {@inheritdoc}
      */
     public static function tableName() {
-        return 'diagnostico';
+        return 'evolucion';
     }
 
     /**

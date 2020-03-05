@@ -3,13 +3,14 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Diagnostico */
+/* @var $model app\models\Evolucion */
 
-$this->title = 'Nuevo Diagnostico';
+$this->title = 'Actualizar Evolucion: ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Diagnosticos', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = 'Actualizar';
 ?>
-<div class="diagnostico-create">
+<div class="evolucion-update">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

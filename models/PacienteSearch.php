@@ -14,10 +14,14 @@ class PacienteSearch extends Paciente {
     /**
      * {@inheritdoc}
      */
+    public $obra;
+
     public function rules() {
         return [
             [['id', 'dni', 'id_usuario', 'id_obra_social'], 'integer'],
-            [['nombre', 'fecha_nacimiento', 'telefono', 'domicilio', 'fecha_ingreso', 'datos_padre', 'datos_madre', 'familiar_responsable', 'derivador_por', 'hospital'], 'safe'],
+            [['nombre', 'fecha_nacimiento', 'telefono', 'domicilio', 'fecha_ingreso',
+            'datos_padre', 'datos_madre', 'familiar_responsable', 'derivador_por',
+            'hospital', 'obra'], 'safe'],
         ];
     }
 
@@ -40,10 +44,18 @@ class PacienteSearch extends Paciente {
         $query = Paciente::find();
 
         // add conditions that should always apply here
+        $query->joinWith(['obra']);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+
+        $dataProvider->sort->attributes['obra'] = [
+            // The tables are the ones our relation are configured to
+            // in my case they are prefixed with "tbl_"
+            'asc' => ['obra_social.nombre' => SORT_ASC],
+            'desc' => ['obra_social.nombre' => SORT_DESC],
+        ];
 
         $this->load($params);
 
@@ -63,7 +75,8 @@ class PacienteSearch extends Paciente {
             'id_obra_social' => $this->id_obra_social,
         ]);
 
-        $query->andFilterWhere(['like', 'nombre', $this->nombre])
+        $query->andFilterWhere(['like', 'paciente.nombre', $this->nombre])
+                ->andFilterWhere(['like', 'obra_social.nombre', $this->obra])
                 ->andFilterWhere(['like', 'telefono', $this->telefono])
                 ->andFilterWhere(['like', 'domicilio', $this->domicilio])
                 ->andFilterWhere(['like', 'datos_padre', $this->datos_padre])

@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="diagnostico-search">
+<div class="evolucion-search">
 
     <?php
     $form = ActiveForm::begin([

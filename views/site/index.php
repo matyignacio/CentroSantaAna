@@ -8,7 +8,7 @@ use yii\helpers\Html;
 <div class="site-index">
 
     <div class="jumbotron">
-        <h1>Bienvenido a Santa Ana 1.0</h1>
+        <h1 style="font-family:verdana;">BIENVENIDO AL SISTEMA DEL INSTITUTO SANTA ANA</h1>
 
         <!--<p class="lead">You have successfully created your Yii-powered application.</p>
 

@@ -3,6 +3,7 @@
 /* @var $content string */
 
 use app\widgets\Alert;
+use app\models\User;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
@@ -40,7 +41,7 @@ AppAsset::register($this);
                             'linkOptions' => ['data-method' => 'post'],],
                 ]];
             } else {
-                if (Yii::$app->user->identity->role == 2) {
+                if (User::isUserAdmin(Yii::$app->user->identity->id)) {
                     // Si el usuario es administrador, vera este menu
                     $menuItems[] = [
                         'label' => 'Administrar',
@@ -62,9 +63,9 @@ AppAsset::register($this);
                     'items' => [
                         ['label' => 'Buscar pacientes', 'url' => ['/paciente']],
                         ['label' => 'Nuevo paciente', 'url' => ['/paciente/create']],
-                        '<li class="dropdown-header">Diagnosticos</li>',
-                        /*['label' => 'Buscar diagnostico', 'url' => ['/paciente']],*/
-                        ['label' => 'Nuevo diagnostico', 'url' => ['/diagnostico/create']],
+                        '<li class="dropdown-header">Evoluciones</li>',
+                        /* ['label' => 'Buscar diagnostico', 'url' => ['/paciente']], */
+                        ['label' => 'Nueva evolucion', 'url' => ['/evolucion/create']],
                     ],
                 ];
                 $menuItems[] = [

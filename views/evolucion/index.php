@@ -5,13 +5,13 @@ use yii\grid\GridView;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\DiagnosticoSearch */
+/* @var $searchModel app\models\EvolucionSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Diagnosticos';
+$this->title = 'Evoluciones';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="diagnostico-index">
+<div class="evolucion-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

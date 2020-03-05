@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="diagnostico-form">
+<div class="evolucion-form">
 
     <?php $form = ActiveForm::begin(); ?>
     <table class="table table-striped">

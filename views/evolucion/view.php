@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use kartik\detail\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Diagnostico */
+/* @var $model app\models\Evolucion */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Diagnosticos', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Evoluciones', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="diagnostico-view">
+<div class="evolucion-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'buttons1' => '',
         'mode' => DetailView::MODE_VIEW,
         'panel' => [
-            'heading' => 'Diagnosticos' . $model->id,
+            'heading' => 'Evoluciones' . $model->id,
             'type' => DetailView::TYPE_PRIMARY,
         ],
         'attributes' => [

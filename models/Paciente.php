@@ -50,7 +50,7 @@ class Paciente extends \yii\db\ActiveRecord {
             [['telefono'], 'string', 'max' => 30],
             [['domicilio'], 'string', 'max' => 150],
             [['id_obra_social'], 'exist', 'skipOnError' => true, 'targetClass' => ObraSocial::className(), 'targetAttribute' => ['id_obra_social' => 'id']],
-            [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_usuario' => 'id']],
+                // A ESTE LO COMENTO PORQUE USER NO ES UN MODELO COMUN, ENTONCES NO TIENE EL METODO FIND[['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_usuario' => 'id']],
         ];
     }
 
@@ -101,6 +101,10 @@ class Paciente extends \yii\db\ActiveRecord {
      * @return \yii\db\ActiveQuery
      */
     public function getObraSocial() {
+        return $this->hasOne(ObraSocial::className(), ['id' => 'id_obra_social']);
+    }
+
+    public function getObra() {
         return $this->hasOne(ObraSocial::className(), ['id' => 'id_obra_social']);
     }
 

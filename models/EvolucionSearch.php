@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Diagnostico;
+use app\models\Evolucion;
 
 /**
- * DiagnosticoSearch represents the model behind the search form of `app\models\Diagnostico`.
+ * DiagnosticoSearch represents the model behind the search form of `app\models\Evolucion`.
  */
-class DiagnosticoSearch extends Diagnostico {
+class EvolucionSearch extends Evolucion {
 
     /**
      * {@inheritdoc}
@@ -37,7 +37,7 @@ class DiagnosticoSearch extends Diagnostico {
      * @return ActiveDataProvider
      */
     public function search($params) {
-        $query = Diagnostico::find();
+        $query = Evolucion::find();
 
         // add conditions that should always apply here
 

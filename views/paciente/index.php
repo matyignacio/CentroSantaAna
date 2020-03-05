@@ -28,20 +28,36 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            //'id',
-            'nombre',
-            //'fecha_nacimiento',
-            'dni',
-            'telefono',
-            //'domicilio',
-            //'fecha_ingreso',
-            //'datos_padre:ntext',
-            //'datos_madre:ntext',
-            //'familiar_responsable',
-            //'derivador_por',
-            //'hospital',
-            //'id_usuario',
-            //'id_obra_social',
+            [
+                'attribute' => 'nombre',
+                'filterInputOptions' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Buscar por nombre...'
+                ]
+            ],
+            [
+                'attribute' => 'dni',
+                'filterInputOptions' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Buscar por DNI...'
+                ]
+            ],
+            [
+                'attribute' => 'telefono',
+                'filterInputOptions' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Buscar por telefono...'
+                ]
+            ],
+            [
+                'attribute' => 'obra',
+                'label' => 'Obra Social',
+                'value' => 'obraSocial.nombre',
+                'filterInputOptions' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Buscar por obra...'
+                ]
+            ],
             ['class' => 'yii\grid\ActionColumn',
                 'template' => '{view} {update}',
             ],

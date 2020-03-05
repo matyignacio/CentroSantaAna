@@ -5,16 +5,16 @@ namespace app\controllers;
 use Yii;
 use yii\filters\AccessControl;
 use app\models\User;
-use app\models\Diagnostico;
-use app\models\DiagnosticoSearch;
+use app\models\Evolucion;
+use app\models\EvolucionSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * DiagnosticoController implements the CRUD actions for Diagnostico model.
+ * Evolucion implements the CRUD actions for Evolucion model.
  */
-class DiagnosticoController extends Controller {
+class EvolucionController extends Controller {
 
     /**
      * {@inheritdoc}
@@ -70,11 +70,11 @@ class DiagnosticoController extends Controller {
     }
 
     /**
-     * Lists all Diagnostico models.
+     * Lists all Evolucion models.
      * @return mixed
      */
     public function actionIndex() {
-        $searchModel = new DiagnosticoSearch();
+        $searchModel = new EvolucionSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -84,7 +84,7 @@ class DiagnosticoController extends Controller {
     }
 
     /**
-     * Displays a single Diagnostico model.
+     * Displays a single Evolucion model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -96,12 +96,12 @@ class DiagnosticoController extends Controller {
     }
 
     /**
-     * Creates a new Diagnostico model.
+     * Creates a new Evolucion model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate() {
-        $model = new Diagnostico();
+        $model = new Evolucion();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -113,7 +113,7 @@ class DiagnosticoController extends Controller {
     }
 
     /**
-     * Updates an existing Diagnostico model.
+     * Updates an existing Evolucion model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -132,7 +132,7 @@ class DiagnosticoController extends Controller {
     }
 
     /**
-     * Deletes an existing Diagnostico model.
+     * Deletes an existing Evolucion model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -145,14 +145,14 @@ class DiagnosticoController extends Controller {
     }
 
     /**
-     * Finds the Diagnostico model based on its primary key value.
+     * Finds the Evolucion model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Diagnostico the loaded model
+     * @return Evolucion the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id) {
-        if (($model = Diagnostico::findOne($id)) !== null) {
+        if (($model = Evolucion::findOne($id)) !== null) {
             return $model;
         }
 
