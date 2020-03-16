@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => 'obraSocial.nombre',
                 'filterInputOptions' => [
                     'class' => 'form-control',
-                    'placeholder' => 'Buscar por obra...'
+                    'placeholder' => 'Buscar por obra social...'
                 ]
             ],
             ['class' => 'yii\grid\ActionColumn',

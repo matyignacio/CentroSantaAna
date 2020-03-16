@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Nuevo Diagnostico', ['create'], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Nueva Evolucion', ['create'], ['class' => 'btn btn-primary']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'id',
             'fecha',
             'resumen:ntext',
-            'is_sensible',
+            //'is_sensible',
             'id_paciente',
             //'id_usuario',
             ['class' => 'yii\grid\ActionColumn',

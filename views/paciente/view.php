@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use kartik\detail\DetailView;
+use app\models\User;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Paciente */
@@ -9,7 +10,7 @@ use kartik\detail\DetailView;
 $this->title = $model->nombre;
 $this->params['breadcrumbs'][] = ['label' => 'Pacientes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-// EXTRAEMOS TODOS LOS Presupuestoservicios QUE ESTEN RELACIONADOS CON ESTE SERVICIO 
+// EXTRAEMOS TODOS LOS modelosAuxiliares QUE ESTEN RELACIONADOS CON ESTE modelo
 $findAll = app\models\AntecedentePaciente::find()
         ->where('id_paciente = :id_paciente', [':id_paciente' => $model->id])
         ->all();
@@ -34,15 +35,18 @@ $findAll = app\models\AntecedentePaciente::find()
                 <?= Html::a('Actualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
             </td>
             <td align="center" width="33%">
-
+                <?php if (User::isTerapeuta(Yii::$app->user->identity->id)) { ?>
+                    <?= Html::a('Formulario terapeuta', ['/pacientetrabajosocial/create', 'id_paciente' => $model->id], ['class' => 'btn btn-primary']) ?>
+                <?php }
+                ?>
             </td>
             <td align="right" width="33%">
                 <?php
-                echo Html::a('<i class="fa glyphicon glyphicon-print"></i> Informe', ['/paciente/imprimir?id=' . $model->id], [
-                    'class' => 'btn btn-warning',
+                echo Html::a('Nuevo informe de evolución', ['/evolucion/create'], [
+                    'class' => 'btn btn-primary',
                     'target' => '_blank',
                     'data-toggle' => 'tooltip',
-                    'title' => 'Informe'
+                    'title' => 'Nuevo informe de evolución'
                 ]);
                 ?>
             </td>

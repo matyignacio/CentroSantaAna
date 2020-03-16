@@ -107,6 +107,7 @@ class PacienteController extends Controller {
         $model = new Paciente();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -132,6 +133,111 @@ class PacienteController extends Controller {
         return $this->render('update', [
                     'model' => $model,
         ]);
+    }
+
+    public function actionInsertar() {
+        // CAPTURAMOS LOS PARAMETROS
+        $paciente = new Paciente();
+        $request = Yii::$app->request;
+        $antecedentespaciente = $request->post('Pacienteantecedentes');
+        // CARGAMOS EL MODELO CON LOS DATOS DEL FORMULARIO
+        $paciente->nombre = $request->post('Paciente')['nombre'];
+        $paciente->fecha_nacimiento = $request->post('Paciente')['fecha_nacimiento'];
+        $paciente->dni = $request->post('Paciente')['dni'];
+        $paciente->id_obra_social = $request->post('Paciente')['id_obra_social'];
+        $paciente->domicilio = $request->post('Paciente')['domicilio'];
+        $paciente->estado_civil = $request->post('Paciente')['estado_civil'];
+        $paciente->telefono = $request->post('Paciente')['telefono'];
+        $paciente->fecha_ingreso = $request->post('Paciente')['fecha_ingreso'];
+        $paciente->datos_padre = $request->post('Paciente')['datos_padre'];
+        $paciente->datos_madre = $request->post('Paciente')['datos_madre'];
+        $paciente->familiar_responsable = $request->post('Paciente')['familiar_responsable'];
+        $paciente->id_usuario = $request->post('Paciente')['id_usuario'];
+        $paciente->hospital = $request->post('Paciente')['hospital'];
+        $paciente->derivador_por = $request->post('Paciente')['derivador_por'];
+        $paciente->certificado_discapacidad = $request->post('Paciente')['certificado_discapacidad'];
+        $paciente->vigencia_certificado = $request->post('Paciente')['vigencia_certificado'];
+        $paciente->escolaridad = $request->post('Paciente')['escolaridad'];
+        $paciente->nombre_escuela = $request->post('Paciente')['nombre_escuela'];
+        // INICIAMOS LA TRANSACCION
+        $transaction = Yii::$app->db->beginTransaction();
+        // INTENTAMOS GUARDAR EL MODELO
+        if (!$paciente->save()) {
+            $transaction->rollBack();
+            return $this->render('create', [
+                        'model' => $paciente,
+            ]);
+        }
+        // INTENTAMOS GUARDAR LOS SERVICIOS
+        if (!$this->saveModelAuxiliar($antecedentespaciente, $paciente->id)) {
+            $transaction->rollBack();
+            return $this->render('create', [
+                        'model' => $paciente,
+            ]);
+        }
+        // COMMITEAMOS LA TRANSACCION
+        $transaction->commit();
+        // POR ULTIMO REDIRECCIONAMOS AL VIEW
+        return $this->redirect(['view', 'id' => $paciente->id]);
+    }
+
+    public function actionActualizar() {
+        $request = Yii::$app->request;
+        // CAPTURAMOS LOS PARAMETROS
+        $paciente = Paciente::findOne($request->post('id'));
+        $antecedentespaciente = $request->post('Pacienteantecedentes');
+        // INICIAMOS LA TRANSACCION
+        $transaction = Yii::$app->db->beginTransaction();
+        // PRIMERO ELIMINAMOS LOS REGISTROS EN LA TABLA AUXILIAR SERVICIO_ANALITO
+        \app\models\AntecedentePaciente::deleteAll('id_paciente = :id_paciente ', [':id_paciente' => $request->post('id')]);
+        // CARGAMOS EL MODELO CON LOS DATOS DEL FORMULARIO
+        $paciente->nombre = $request->post('Paciente')['nombre'];
+        $paciente->fecha_nacimiento = $request->post('Paciente')['fecha_nacimiento'];
+        $paciente->dni = $request->post('Paciente')['dni'];
+        $paciente->id_obra_social = $request->post('Paciente')['id_obra_social'];
+        $paciente->domicilio = $request->post('Paciente')['domicilio'];
+        $paciente->estado_civil = $request->post('Paciente')['estado_civil'];
+        $paciente->telefono = $request->post('Paciente')['telefono'];
+        $paciente->fecha_ingreso = $request->post('Paciente')['fecha_ingreso'];
+        $paciente->datos_padre = $request->post('Paciente')['datos_padre'];
+        $paciente->datos_madre = $request->post('Paciente')['datos_madre'];
+        $paciente->familiar_responsable = $request->post('Paciente')['familiar_responsable'];
+        $paciente->id_usuario = $request->post('Paciente')['id_usuario'];
+        $paciente->hospital = $request->post('Paciente')['hospital'];
+        $paciente->derivador_por = $request->post('Paciente')['derivador_por'];
+        $paciente->certificado_discapacidad = $request->post('Paciente')['certificado_discapacidad'];
+        $paciente->vigencia_certificado = $request->post('Paciente')['vigencia_certificado'];
+        $paciente->escolaridad = $request->post('Paciente')['escolaridad'];
+        $paciente->nombre_escuela = $request->post('Paciente')['nombre_escuela'];
+        // INTENTAMOS GUARDAR EL MODELO
+        if (!$paciente->save()) {
+            $transaction->rollBack();
+            return $this->render('update', [
+                        'model' => $paciente,
+            ]);
+        }
+        // INTENTAMOS GUARDAR LOS SERVICIOS
+        if (!$this->saveModelAuxiliar($antecedentespaciente, $request->post('id'))) {
+            $transaction->rollBack();
+            return $this->render('update', [
+                        'model' => $paciente,
+            ]);
+        }
+        // COMMITEAMOS LA TRANSACCION
+        $transaction->commit();
+        // POR ULTIMO REDIRECCIONAMOS AL VIEW
+        return $this->redirect(['view', 'id' => $paciente->id]);
+    }
+
+    public function saveModelAuxiliar($antecedentespaciente, $id_paciente) {
+        unset($antecedentespaciente['__id__']); // remove the hidden "new " row
+        foreach ($antecedentespaciente as $antecedentepaciente) {
+            $antecedente_paciente = new \app\models\AntecedentePaciente();
+            $antecedente_paciente->id_paciente = $id_paciente;
+            $antecedente_paciente->id_antecedente = $antecedentepaciente['id_antecedente'];
+            $antecedente_paciente->save();
+        }
+        return true;
     }
 
     public function actionImprimir($id) {
@@ -229,10 +335,10 @@ div {
     <table width=100%>
     ';
         foreach ($findAllDiagnosticos as $diagnosticopaciente) {
-             $html .= '<tr>';
-              $html .= '<td><p>$' . ($diagnosticopaciente->resumen)
-              . '</p></td>';
-              $html .= '</tr>'; 
+            $html .= '<tr>';
+            $html .= '<td><p>$' . ($diagnosticopaciente->resumen)
+                    . '</p></td>';
+            $html .= '</tr>';
         }
         $html .= '</table>
 </div>

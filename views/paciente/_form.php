@@ -17,15 +17,31 @@ use moonland\select2\Select2;
     $findAll = []; // ARRAY DE TODOS LOS "MODELS AUXILIARES" EN CASO DE QUE SEA UN UPDATE
     // DEFINIMOS LA RUTA PARA INSERTAR UN NUEVO SERVICIO O PARA ACTUALIZAR SI YA EXISTE
     // LO HACEMOS ANTES DEL FORM BEGIN PARA PODER SETEAR LA RUTA
-    $form = ActiveForm::begin();
+    if ($model->id > 0) { //UPDATE
+        $ruta = "/paciente/actualizar";
+    } else { //CREATE
+        $ruta = "/paciente/insertar";
+    }
+    $form = ActiveForm::begin([
+                'action' => yii\helpers\Url::to([$ruta]),
+    ]);
+    // ACA VOLVEMOS A EVALUAR, PARA INSERTAR UN NUEVO ELEMENTO EN EL FORMULARIO QUE SERIA EL ID OCULTO
+    if ($model->id > 0) { //UPDATE 
+        ?>
+        <input name="id" type="hidden" value="<?php echo $model->id ?>" />
+        <?php
+        $findAll = app\models\AntecedentePaciente::find()
+                ->where('id_paciente = :id_paciente', [':id_paciente' => $model->id])
+                ->all();
+    }
     ?>
     <fieldset>
-        <table class="table table-striped">
+        <table class="table table-condensed">
             <tr>
-                <td colspan="2">  
+                <td width="25%">  
                     <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
                 </td>
-                <td>  
+                <td width="25%">  
                     <?php
                     echo $form->field($model, 'fecha_nacimiento')->widget(\kartik\datecontrol\DateControl::classname(), [
                         'type' => 'date',
@@ -45,13 +61,36 @@ use moonland\select2\Select2;
                     ]);
                     ?>
                 </td>
-                <td>  
+                <td width="25%">  
                     <?= $form->field($model, 'dni')->textInput() ?>
+                </td>
+                <td width="25%">  
+                    <?php
+                    echo $form->field($model, 'id_obra_social')->widget(Select2::className(), [
+                        'items' => ArrayHelper::map(app\models\ObraSocial::find()
+                                        ->select('id, nombre')
+                                        ->orderBy('nombre')
+                                        ->all(), 'id', function($model) {
+                                    return $model['nombre'];
+                                }
+                        ),
+                        'size' => Select2::SMALL,
+                    ])->label('Obra Social');
+                    ?>
                 </td>
             </tr>
             <tr>    
-                <td colspan="2">  
+                <td>  
                     <?= $form->field($model, 'domicilio')->textInput(['maxlength' => true]) ?>
+                </td>
+                <td>
+                    <?=
+                    $form->field($model, 'estado_civil')->dropDownList(['Soltero/a' => 'Soltero/a'
+                        , 'Casado/a' => 'Casado/a'
+                        , 'Divorciado/a' => 'Divorciado/a'
+                        , 'Viudo/a' => 'Viudo/a'],
+                            ['prompt' => 'Seleccione una opcion']);
+                    ?>   
                 </td>
                 <td>  
                     <?= $form->field($model, 'telefono')->textInput(['maxlength' => true]) ?>
@@ -79,39 +118,57 @@ use moonland\select2\Select2;
             </tr>
             <tr>
                 <td>  
-                    <?= $form->field($model, 'datos_padre')->textarea(['rows' => 6]) ?>
+                    <?= $form->field($model, 'datos_padre')->textarea(['rows' => 4]) ?>
                 </td>
                 <td>  
-                    <?= $form->field($model, 'datos_madre')->textarea(['rows' => 6]) ?>
+                    <?= $form->field($model, 'datos_madre')->textarea(['rows' => 4]) ?>
                 </td>
                 <td>  
                     <?= $form->field($model, 'familiar_responsable')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'id_usuario')->hiddenInput(['value' => Yii::$app->user->identity->id])->label(false); ?>
                 </td>
                 <td>  
+                    <?= $form->field($model, 'hospital')->textInput(['maxlength' => true]) ?>
                     <?= $form->field($model, 'derivador_por')->textInput(['maxlength' => true]) ?>
                 </td>
             </tr>
             <tr>
-                <td>  
-                    <?= $form->field($model, 'hospital')->textInput(['maxlength' => true]) ?>
+                <td>
+                    <?=
+                    $form->field($model, 'certificado_discapacidad')->dropDownList(['0' => 'No tiene'
+                        , '1' => 'Si tiene'],
+                            ['prompt' => 'Seleccione una opcion']);
+                    ?>   
                 </td>
-                <td>  
-                    <?= $form->field($model, 'id_usuario')->textInput(['readonly' => true, 'value' => Yii::$app->user->identity->id]); ?>
-
-                </td>
-                <td colspan="2">  
+                <td>
                     <?php
-                    echo $form->field($model, 'id_obra_social')->widget(Select2::className(), [
-                        'items' => ArrayHelper::map(app\models\ObraSocial::find()
-                                        ->select('id, nombre')
-                                        ->orderBy('nombre')
-                                        ->all(), 'id', function($model) {
-                                    return $model['nombre'];
-                                }
-                        ),
-                        'size' => Select2::SMALL,
-                    ])->label('Obra Social');
+                    echo $form->field($model, 'vigencia_certificado')->widget(\kartik\datecontrol\DateControl::classname(), [
+                        'type' => 'date',
+                        'ajaxConversion' => true,
+                        'autoWidget' => true,
+                        'widgetClass' => '',
+                        'displayFormat' => 'php:d-F-Y',
+                        'saveFormat' => 'php:Y-m-d',
+                        'widgetOptions' => [
+                            'pluginOptions' => [
+                                'autoclose' => true,
+                                'format' => 'php:d-F-Y',
+                                'todayHighlight' => true
+                            ]
+                        ],
+                        'language' => 'es'
+                    ]);
                     ?>
+                </td>
+                <td>
+                    <?=
+                    $form->field($model, 'escolaridad')->dropDownList(['Comun' => 'Común'
+                        , 'Especial' => 'Especial'],
+                            ['prompt' => 'Seleccione una opcion']);
+                    ?>   
+                </td>
+                <td>
+                    <?= $form->field($model, 'nombre_escuela')->textInput(['maxlength' => true]) ?>
                 </td>
             </tr>
         </table>

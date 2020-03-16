@@ -49,7 +49,7 @@ class Evolucion extends \yii\db\ActiveRecord {
             'resumen' => 'Resumen',
             'is_sensible' => 'Es Sensible',
             'id_paciente' => 'Paciente',
-            'id_usuario' => 'Usuario',
+            'id_usuario' => 'Profesional a cargo',
         ];
     }
 
