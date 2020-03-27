@@ -54,12 +54,12 @@ class PacienteTrabajoSocial extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'vivienda' => 'Vivienda',
-            'aspecto_economico' => 'Aspecto Economico',
-            'problematicas_salud' => 'Problematicas Salud',
-            'diagnostico' => 'Diagnostico',
-            'medico_cabecera' => 'Medico Cabecera',
+            'aspecto_economico' => 'Aspecto Económico',
+            'problematicas_salud' => 'Problemáticas de salud',
+            'diagnostico' => 'Diagnóstico',
+            'medico_cabecera' => 'Médico Cabecera',
             'actividades' => 'Actividades',
-            'conclusion' => 'Conclusion',
+            'conclusion' => 'Conclusión',
             'id_paciente' => 'Id Paciente',
         ];
     }

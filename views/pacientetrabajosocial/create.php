@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\PacienteTrabajoSocial */
 
-$this->title = 'Nuevo Paciente Trabajo Social';
-$this->params['breadcrumbs'][] = ['label' => 'Paciente Trabajo Socials', 'url' => ['index']];
+$this->title = 'Planilla Paciente';
+$this->params['breadcrumbs'][] = ['label' => 'Paciente Trabajo Social', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="paciente-trabajo-social-create">

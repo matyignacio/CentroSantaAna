@@ -35,7 +35,7 @@ class GrupoConviviente extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre', 'parentesco', 'edad'], 'required'],
+            //[['nombre', 'parentesco', 'edad'], 'required'],
             [['edad', 'id_obra_social', 'id_paciente_trabajo_social'], 'integer'],
             [['nombre', 'parentesco', 'escolaridad', 'laboral'], 'string', 'max' => 45],
             [['id_obra_social'], 'exist', 'skipOnError' => true, 'targetClass' => ObraSocial::className(), 'targetAttribute' => ['id_obra_social' => 'id']],

@@ -37,7 +37,7 @@ AppAsset::register($this);
             ]);
             if (Yii::$app->user->isGuest) {
                 $menuItems[] = ['label' => 'Ingresar', 'items' => [
-                        ['label' => 'Iniciar sesion.', 'url' => ['/site/login'],
+                            ['label' => 'Iniciar sesion.', 'url' => ['/site/login'],
                             'linkOptions' => ['data-method' => 'post'],],
                 ]];
             } else {
@@ -47,35 +47,35 @@ AppAsset::register($this);
                         'label' => 'Administrar',
                         'items' => [
                             '<li class="dropdown-header">Antecedentes</li>',
-                            ['label' => 'Buscar antecedentes', 'url' => ['/antecedentes']],
-                            ['label' => 'Nuevo antecedente', 'url' => ['/antecedentes/create']],
+                                ['label' => 'Buscar antecedente', 'url' => ['/antecedentes']],
+                                ['label' => 'Nuevo antecedente', 'url' => ['/antecedentes/create']],
                             '<li class="dropdown-header">Obra Social</li>',
-                            ['label' => 'Buscar Obra Social', 'url' => ['/obrasocial']],
-                            ['label' => 'Nueva Obra Social', 'url' => ['/obrasocial/create']],
+                                ['label' => 'Buscar Obra Social', 'url' => ['/obrasocial']],
+                                ['label' => 'Nueva Obra Social', 'url' => ['/obrasocial/create']],
                             '<li class="dropdown-header">Profesion</li>',
-                            ['label' => 'Buscar Profesion', 'url' => ['/profesion']],
-                            ['label' => 'Nueva Profesion', 'url' => ['/profesion/create']],
+                                ['label' => 'Buscar Profesion', 'url' => ['/profesion']],
+                                ['label' => 'Nueva Profesion', 'url' => ['/profesion/create']],
                         ],
                     ];
                 }
                 $menuItems[] = [
                     'label' => 'Pacientes',
                     'items' => [
-                        ['label' => 'Buscar pacientes', 'url' => ['/paciente']],
-                        ['label' => 'Nuevo paciente', 'url' => ['/paciente/create']],
+                            ['label' => 'Buscar paciente', 'url' => ['/paciente']],
+                            ['label' => 'Nuevo paciente', 'url' => ['/paciente/create']],
                         '<li class="dropdown-header">Evoluciones</li>',
                         /* ['label' => 'Buscar diagnostico', 'url' => ['/paciente']], */
-                        ['label' => 'Nueva evolucion', 'url' => ['/evolucion/create']],
+                            ['label' => 'Nueva evolucion', 'url' => ['/evolucion/create']],
                     ],
                 ];
                 $menuItems[] = [
                     'label' => 'Salir (' . Yii::$app->user->identity->username . ')',
                     'items' => [
                         '<li class="dropdown-header">Sesion</li>',
-                        ['label' => 'Cerrar sesion', 'url' => ['/site/logout'],
+                            ['label' => 'Cerrar sesion', 'url' => ['/site/logout'],
                             'linkOptions' => ['data-method' => 'post'],],
                         '<li class="dropdown-header">Administracion</li>',
-                        ['label' => 'Crear nuevo usuario', 'url' => ['/site/register']],
+                            ['label' => 'Crear nuevo usuario', 'url' => ['/site/register']],
                     ],
                 ];
             }

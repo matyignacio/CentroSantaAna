@@ -88,8 +88,7 @@ use moonland\select2\Select2;
                     $form->field($model, 'estado_civil')->dropDownList(['Soltero/a' => 'Soltero/a'
                         , 'Casado/a' => 'Casado/a'
                         , 'Divorciado/a' => 'Divorciado/a'
-                        , 'Viudo/a' => 'Viudo/a'],
-                            ['prompt' => 'Seleccione una opcion']);
+                        , 'Viudo/a' => 'Viudo/a'], ['prompt' => 'Seleccione una opcion']);
                     ?>   
                 </td>
                 <td>  
@@ -136,8 +135,7 @@ use moonland\select2\Select2;
                 <td>
                     <?=
                     $form->field($model, 'certificado_discapacidad')->dropDownList(['0' => 'No tiene'
-                        , '1' => 'Si tiene'],
-                            ['prompt' => 'Seleccione una opcion']);
+                        , '1' => 'Si tiene'], ['prompt' => 'Seleccione una opcion']);
                     ?>   
                 </td>
                 <td>
@@ -163,8 +161,7 @@ use moonland\select2\Select2;
                 <td>
                     <?=
                     $form->field($model, 'escolaridad')->dropDownList(['Comun' => 'Común'
-                        , 'Especial' => 'Especial'],
-                            ['prompt' => 'Seleccione una opcion']);
+                        , 'Especial' => 'Especial'], ['prompt' => 'Seleccione una opcion']);
                     ?>   
                 </td>
                 <td>
