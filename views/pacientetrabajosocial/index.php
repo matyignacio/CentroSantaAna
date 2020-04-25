@@ -18,15 +18,15 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Nuevo Paciente Trabajo Social', ['create'], ['class' => 'btn btn-primary']) ?>
     </p>
 
-                    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-    
-            <?= GridView::widget([
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+
+    <?=
+    GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-        ['class' => 'yii\grid\SerialColumn'],
-
-                    'id',
+            ['class' => 'yii\grid\SerialColumn'],
+            'id',
             'vivienda',
             'aspecto_economico',
             'problematicas_salud',
@@ -35,12 +35,12 @@ $this->params['breadcrumbs'][] = $this->title;
             //'actividades',
             //'conclusion',
             //'id_paciente',
-
-        ['class' => 'yii\grid\ActionColumn',
-        'template' => '{view} {update}',
-        ],
+            ['class' => 'yii\grid\ActionColumn',
+                'template' => '{view} {update}',
+            ],
         ]
-        ]); ?>
-    
-    
+    ]);
+    ?>
+
+
 </div>

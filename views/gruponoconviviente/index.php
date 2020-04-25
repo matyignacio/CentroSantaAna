@@ -18,15 +18,15 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Nuevo Grupo No Conviviente', ['create'], ['class' => 'btn btn-primary']) ?>
     </p>
 
-                    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-    
-            <?= GridView::widget([
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+
+    <?=
+    GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-        ['class' => 'yii\grid\SerialColumn'],
-
-                    'id',
+            ['class' => 'yii\grid\SerialColumn'],
+            'id',
             'nombre',
             'parentesco',
             'edad',
@@ -34,12 +34,12 @@ $this->params['breadcrumbs'][] = $this->title;
             //'laboral',
             //'id_obra_social',
             //'id_paciente_trabajo_social',
-
-        ['class' => 'yii\grid\ActionColumn',
-        'template' => '{view} {update}',
-        ],
+            ['class' => 'yii\grid\ActionColumn',
+                'template' => '{view} {update}',
+            ],
         ]
-        ]); ?>
-    
-    
+    ]);
+    ?>
+
+
 </div>

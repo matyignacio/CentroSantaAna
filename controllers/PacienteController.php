@@ -7,7 +7,6 @@ use yii\filters\AccessControl;
 use app\models\User;
 use app\models\Paciente;
 use yii\helpers\Html;
-use yii\helpers\Url;
 use app\models\PacienteSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;

@@ -35,9 +35,27 @@ $findAll = app\models\AntecedentePaciente::find()
                 <?= Html::a('Actualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
             </td>
             <td align="center" width="33%">
-                <?php if (User::isTerapeuta(Yii::$app->user->identity->id)) { ?>
-                    <?= Html::a('Formulario terapeuta', ['/pacientetrabajosocial/create', 'id_paciente' => $model->id], ['class' => 'btn btn-primary']) ?>
-                <?php }
+                <?php
+                if (User::isTerapeuta(Yii::$app->user->identity->id)) {
+                    // EN EL PRIMER IF EVALUO SI EL USUARIO LOGUEADO ES UN USUARIO TERAPEUTA
+                    if ($pacienteTrabajoSocial = \app\models\PacienteTrabajoSocial::findOne([
+                                'id_paciente' => $model->id
+                            ])) {
+                        // EN ESTE SEGUNDO IF EVALUO SI EL PACIENTE YA TIENE CARGADO
+                        // SU RESPECTIVO FORMULARIO DE TRABAJO SOCIAL
+                        // PARA DIRECCIONAR AL CREATE O AL UPDATE DEPENDIENDO DEL CASO
+                        ?>
+                        <?=
+                        Html::a('Formulario terapeuta', ['/pacientetrabajosocial/update?id=' . $pacienteTrabajoSocial->id
+                            . '&id_paciente=' . $model->id], ['class' => 'btn btn-primary'])
+                        // AL UPDATE
+                        ?> 
+                    <?php } else { ?>
+                        <?= Html::a('Formulario terapeuta', ['/pacientetrabajosocial/create', 'id_paciente' => $model->id], ['class' => 'btn btn-primary']) ?> 
+                        <?php
+                        // AL CREATE
+                    }
+                }
                 ?>
             </td>
             <td align="right" width="33%">
